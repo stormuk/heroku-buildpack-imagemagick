@@ -9,7 +9,7 @@ echo "-----> Install ImageMagick"
 BUILD_DIR=$1
 VENDOR_DIR="$BUILD_DIR/vendor"
 INSTALL_DIR="$VENDOR_DIR/imagemagick"
-CACHE_FILE="$CACHE_DIR/imagemagick.tar.gz"
+CACHE_FILE="$CACHE_DIR/imagemagick.tar.xz"
 
 
 if [ ! -f $CACHE_FILE ]; then
@@ -20,7 +20,7 @@ if [ ! -f $CACHE_FILE ]; then
   IMAGE_MAGICK_URL="http://www.imagemagick.org/download/relaeses/$IMAGE_MAGICK_FILE"
 
   echo "-----> Downloading ImageMagick from $IMAGE_MAGICK_URL"
-  curl -L --silent $IMAGE_MAGICK_URL | tar xz
+  curl -L --silent $IMAGE_MAGICK_URL | tar xf
 
   echo "-----> Building ImageMagick"
   cd $IMAGE_MAGICK_DIR
@@ -35,8 +35,8 @@ if [ ! -f $CACHE_FILE ]; then
   echo "-----> Caching ImageMagick installation"
   cd $VENDOR_DIR
   REL_INSTALL_DIR="imagemagick"
-  tar czf $REL_INSTALL_DIR.tar.gz $REL_INSTALL_DIR
-  mv $REL_INSTALL_DIR.tar.gz $CACHE_FILE
+  tar czf $REL_INSTALL_DIR.tar.xz $REL_INSTALL_DIR
+  mv $REL_INSTALL_DIR.tar.xz $CACHE_FILE
 
 else
   # cache exists, extract it
